@@ -297,7 +297,7 @@ public:
       RenderHudPicFX(pdp);
 
       if (_pShell->GetINDEX("hud_bShowAll") && bShowExtras) {
-        CPlacement3D plLight(_vViewerLightDirection, ANGLE3D(0, 0, 0));
+        CPlacement3D plLight(_vViewerLightDirection + plViewer.pl_PositionVector, ANGLE3D(0, 0, 0));
         plLight.AbsoluteToRelative(plViewer);
 
         CPlayerWeapons& weapons = *((CPlayerWeapons*)m_penWeapons.ep_pen);

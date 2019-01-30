@@ -74,12 +74,16 @@ extern const char* g_pixelShader = "#version 330\n\
     uniform sampler2D reflectionTexture;\n\
     uniform sampler2D detailNormalTexture;\n\
     uniform sampler2D glossTexture;\n\
-    void main()\n\
-    {\n\
-      vec3 nD = TBN * (1.9921875 * texture(detailNormalTexture, vec2(UV.x * detailNormalTileU, UV.y * detailNormalTileV)).xyz - 1.0);\n\
-      nD = normalize((1.0 + detailNormalStrength) * normal - nD * detailNormalStrength);\n\
-      vec3 n = TBN * (1.9921875 * texture(normalTexture, UV).xyz - 1.0);\n\
-      n = normalize(((1.0 + normalStrength) * normal - n * normalStrength) + nD * detailNormalStrength);\n\
+  \n\
+  void main()\n\
+  {\n\
+      vec3 colND = texture(detailNormalTexture, vec2(UV.x * detailNormalTileU, UV.y * detailNormalTileV)).xyz;\n\
+      vec3 colN = texture(normalTexture, UV).xyz;\n\
+      colND = mix(vec3(0.0, 0.0, 1.0), colND * 2.0 - vec3(1.0), detailNormalStrength);\n\
+      colN = colN * 2.0 - vec3(1.0);\n\
+      vec2 pd = colN.xy / colN.z + colND.xy / colND.z;\n\
+      vec3 n = TBN * (1.9921875 * (normalize(vec3(pd, 1.0)) * 0.5 + vec3(0.5)) - 1.0);\n\
+      n = normalize((1.0 + normalStrength) * normal - n * normalStrength);\n\
       \n\
       \n\
       vec3 reflPos = reflect(refl, vec3(viewMatrix * vec4(n, 0.0)));\n\
