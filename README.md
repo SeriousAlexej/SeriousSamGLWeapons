@@ -14,7 +14,7 @@ dead technologies anyway :)
 
 # INSTALLATION
 Binary release can be found here:
-https://drive.google.com/file/d/1ztvg1Vm-V9JdbagoWRqruGoXrvhUsztR/view?usp=sharing
+https://drive.google.com/file/d/1MJvkQhirUDv7-hnCk-m5IYO6w-u6aHjn/view?usp=sharing
 
 Unpack in root directory of your Serious Sam.
 You might want to make a backup of your *Classes* folder, if you have it unpacked.
